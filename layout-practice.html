@@ -6,7 +6,6 @@
     <title>Flex 练习</title>
     <style>
         .box {
-            width: 100px;
             height: 100px;
             background-color: #3498db;
             border: 2px solid #2980b9;
@@ -21,17 +20,31 @@
             background-color: #eee;
             height: 300px;
             display: flex;
-            justify-content: space-evenly;
             align-items: center;
+        }
+
+        .box-1 {
+            background-color: red;
+            flex-grow: 1;
+        }
+
+        .box-2 {
+            background-color: green;
+            flex-grow: 1;
+        }
+
+        .box-3 {
+            background-color: blue;
+            flex-grow: 2;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="box">1</div>
-        <div class="box">2</div>
-        <div class="box">3</div>
+        <div class="box box-1">1</div>
+        <div class="box box-2">2</div>
+        <div class="box box-3">3</div>
     </div>
 
 </body>

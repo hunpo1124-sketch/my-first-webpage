@@ -18,11 +18,32 @@
 
         }
 
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .menu {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
         h1 {
             color: #2c3e50;
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 5px;
+        }
+
+        h1::before {
+            content: "#";
+            color: #3a82ef;
+            font-size: 20px;
+            vertical-align: middle; /* 微调对齐 */
         }
 
         p {
@@ -37,13 +58,13 @@
         }
 
         .avatar {
-            width: 80px;
-            height: 80px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             border: 3px solid #ddd;
         }
 
-        .btn {
+        .link-btn {
             display: block;
             background-color: #3a82ef;
             color: white;
@@ -54,29 +75,12 @@
             transition: 0.3s;
         }
 
-        .btn:hover {
+        .link-btn:hover {
             background-color: #8bb7f8;
             transform: scale(1.05); /* 稍微放大一点点 */
         }
 
-        @media (min-width: 600px) {
-            .card {
-                width: 400px;
-                margin: 100px auto;
-                padding: 40px;
-            }
-
-            h1 {
-                font-size: 32px;
-            }
-
-            .avatar {
-                width: 120px;
-                height: 120px;
-                border-radius: 50%;
-            }
-        }
-
+        
         /* 黑夜模式的样式 */
         body.dark-mode {
             background-color: #1a1a1a;
@@ -105,7 +109,6 @@
         }
 
        .btn {
-        display: flex;
         padding: 10px 20px;
         border: none;
         font-size: 14px;
@@ -113,8 +116,8 @@
         color: white;
         cursor: pointer;
         margin-right: 10px;
-        justify-content: space-evenly;
         transition: all 0.3s;
+        white-space: nowrap;  /* 阻止文字换行 */
        }
 
        .save {
@@ -122,6 +125,9 @@
         border: 1px solid #2ecc71;
         color: #2ecc71;
         border-radius: 20px;
+        flex-grow: 2;
+        text-align: center;
+        order: 2;  /* 改变顺序 */
        }
 
        .save:hover {
@@ -148,7 +154,7 @@
         border-radius: 20px;
        }
 
-       .cacel:hover {
+       .cancel:hover {
         background-color: #95a5a6;
         color: white;
        }
@@ -157,14 +163,75 @@
         margin-top: 30px;
         padding-top: 20px;
         border-top: 1px solid #eee;
-        text-align: center;
+        display: flex;
+        flex-direction: column; /* 改成竖排 */
+        gap: 12px;  /* gap：元素之间的间距，比margin 更好用 */
        }
 
-       .btn {
+       /* 1.父相：定义基本坐标系 */
+       .avatar-container {
+        position: relative; 
         display: inline-block;
-        width: auto;
-        margin: 5px;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
        }
 
+       /* 2.子绝：开始定位 */
+       /* .status-dot {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        background-color: #2ecc71;
+        border: 3px solid white;
+        border-radius: 50%;
+       } */
+
+       /* 用::after 来画 dot */
+       .avatar-container::after {
+        /* 【必须】content 属性是伪元素的灵魂，哪怕是空的也必须写，否则不显示 */
+        content: "";
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 14px;
+        height: 14px;
+        background-color: #2ecc71;
+        border: 3px solid white;
+        border-radius: 50%;
+        pointer-events: none;
+       }
+
+       @media (min-width: 600px) {
+            .card {
+                width: 400px;
+                margin: 100px auto;
+                padding: 40px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .avatar {
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+            }
+
+            .action-box {
+                flex-direction: row; /* 桌面端 横排 */
+            }
+
+            .save {
+                flex-grow: 1; /* 桌面端强调主按钮 */
+            }
+
+            .menu {
+                display: none;
+            }
+        }
 
 

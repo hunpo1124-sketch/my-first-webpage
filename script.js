@@ -1,11 +1,13 @@
         // 1.获取元素：找到那个按钮，存在变量里
         // const 意思是定义一个“常量” （不会变的东西）
         const toggleBtn = document.getElementById("theme-toggle");
+        const saveBtn = document.querySelector(".save");
+        const card = document.querySelector(".card");
+        const deleteBtn = document.querySelector(".delete");
 
         // 找到 body 元素，改背景
         const body = document.body;
 
-        const card = document.querySelector(".card");
 
         // 2.定义功能：点击之后要发生什么？
         function switchTheme () {
@@ -25,6 +27,31 @@
         // 3.绑定事件：当按钮被“click” 时， 执行 switchTheme 函数
         toggleBtn.addEventListener("click",switchTheme);
 
+        saveBtn.addEventListener('click', function() {
+            // 动作A：弹窗
+            alert('名片已保存！（模拟）');
+
+            // 动作B：修改文字
+            saveBtn.innerText = "已保存";
+
+            // 动作C：修改样式
+            // 直接改 CSS 背景色
+            saveBtn.style.backgroundColor = "#2ecc71"
+            saveBtn.style.color = "white";
+        })
+
+        deleteBtn.addEventListener('click', function() {
+            // confirm 会退回 ture （点了确定）或 false (点了取消)
+           const isSure = confirm("确定要删除名片吗？");
+
+           if (isSure) {
+            // 隐藏卡片的魔法
+            card.style.display = "none";
+           }
+        })
+
+
+
         // 1.定义一个函数，专门用来更新时间
         function updateTime () {
             const now = new Date();
@@ -41,3 +68,4 @@
             // 1000毫秒 = 1秒
             //每过1000毫秒就去自动跑一遍 updateTime 函数
             setInterval(updateTime,1000);
+
